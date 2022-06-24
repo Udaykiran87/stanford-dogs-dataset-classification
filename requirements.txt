@@ -1,9 +1,14 @@
 ### dependency
 tqdm
 dvc
-pandas
-numpy
 PyYAML
+numpy
+pandas
+scikit-image
+ipython
+matplotlib
+keras
+tensorflow-gpu==2.1.0
 
 ### local packages -
-# -e . # << uncomment this to install from setup.py
+-e . # << uncomment this to install from setup.py
