@@ -4,17 +4,13 @@ artifacts:
   ARTIFACTS_DIR: artifacts
   TRAINED_MODEL_DIR: model
   BASE_MODEL_DIR: base_model
-  BASE_MODEL_NAME: base_model.h5
-  UPDATED_BASE_MODEL_NAME: updated_base_model.h5
+  BASE_MODEL_NAME: inceptionv3_base_model.h5
+  UPDATED_BASE_MODEL_NAME: updated_inceptionv3_base_model.h5
   CHECKPOINT_DIR: checkpoints
   BASE_LOG_DIR: base_model_dir
   TENSORBOARD_ROOT_LOG_DIR: tensorboard_log_dir
   CALLBACKS_DIR: callbacks
+  DATA_DIR: dataset
 
-source_download_dirs:
-  - path_to_data_1
-  - path_to_data_1
-
-local_data_dirs:
-  - path_to_local_data_1
-  - path_to_local_data_2
+  local_data_dirs:
+    TRAIN_DATA_DIR:  \dataset\archive\images\Images
