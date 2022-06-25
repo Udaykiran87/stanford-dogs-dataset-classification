@@ -12,5 +12,13 @@ artifacts:
   CALLBACKS_DIR: callbacks
   DATA_DIR: dataset
 
-  local_data_dirs:
+  train_data_dirs:
     TRAIN_DATA_DIR:  \dataset\archive\images\Images
+
+source_download_dirs:
+  - ../outside_data/dog
+  - ../outside_data/cat
+
+local_data_dirs:
+  - data/dog
+  - data/cat    
