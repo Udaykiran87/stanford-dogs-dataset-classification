@@ -1,11 +1,12 @@
 import argparse
 import os
+import io
 import shutil
 from tqdm import tqdm
 import logging
 import argparse
 import pandas as pd
-from src.utils import read_yaml, create_directories
+from src.utils import read_yaml, create_directories, get_inceptionV3_model, prepare_model
 
 
 STAGE = "prepare_base_model" 
@@ -32,6 +33,36 @@ def main(config_path, params_path):
     create_directories([base_model_dir_path])
 
     base_model_path = os.path.join(base_model_dir_path, base_model_name)
+
+    input_shape = (params["preprocess"]["img_width"], params["preprocess"]["img_height"], params["preprocess"]["channels"])
+    model = get_inceptionV3_model(
+        input_shape = input_shape,
+        model_path = base_model_path
+        )
+
+    full_model = prepare_model(
+        model = model, 
+        CLASSES = params["model"]["CLASSES"], 
+        freeze_all = True, 
+        freeze_till = None, 
+        learning_rate = params["model"]["LEARNING_RATE"]
+        )
+
+    update_base_model_path = os.path.join(
+        base_model_dir_path,
+        artifacts["UPDATED_BASE_MODEL_NAME"]
+    )
+
+    def _log_model_summary(full_model):
+        with io.StringIO() as stream:
+            full_model.summary(print_fn=lambda x: stream.write(f"{x}\n"))
+            summary_str = stream.getvalue()
+        return summary_str
+
+    logging.info(f"full model summary: \n{_log_model_summary(full_model)}")
+
+    full_model.save(update_base_model_path)
+
 
 
 if __name__ == '__main__':
