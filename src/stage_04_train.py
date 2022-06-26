@@ -1,7 +1,7 @@
 import argparse
 import os
 import logging
-from src.utils import read_yaml, create_directories, load_full_model, get_callbacks
+from src.utils import read_yaml, create_directories, load_full_model, get_callbacks, train_valid_generator
 
 
 
@@ -32,6 +32,11 @@ def train_model(config_path, params_path):
 
     callback_dir_path = os.path.join(artifacts_dir, artifacts["CALLBACKS_DIR"])
     callbacks = get_callbacks(callback_dir_path)
+
+    train_generator, valid_generator = train_valid_generator(
+        config,
+        params
+    )
 
 
 if __name__ == '__main__':
