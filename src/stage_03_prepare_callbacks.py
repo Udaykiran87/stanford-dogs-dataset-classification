@@ -1,7 +1,7 @@
 import argparse
 import os
 import logging
-from src.utils import read_yaml, create_directories, get_inceptionV3_model, prepare_model
+from src.utils import read_yaml, create_directories, create_and_save_tensorboard_callback, create_and_save_checkpoint_callback
 import io
 
 
@@ -33,6 +33,9 @@ def prepare_callbacks(config_path, params_path):
         checkpoint_dir,
         callbacks_dir
     ])
+
+    create_and_save_tensorboard_callback(callbacks_dir, tensorboard_log_dir)
+    create_and_save_checkpoint_callback(callbacks_dir, checkpoint_dir)
 
 
 if __name__ == '__main__':
