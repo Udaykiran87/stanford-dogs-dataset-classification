@@ -8,7 +8,8 @@ scikit-image
 ipython
 matplotlib
 keras
-tensorflow-gpu==2.1.0
+grpcio-tools>=1.44.0
+tensorflow==2.7.0
 protobuf==3.20.*
 h5py==2.10.0
 
