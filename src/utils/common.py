@@ -1,3 +1,4 @@
+from enum import unique
 import os
 import yaml
 import logging
@@ -22,3 +23,8 @@ def save_json(path: str, data: dict) -> None:
         json.dump(data, f, indent=4)
 
     logging.info(f"json file saved at: {path}")
+
+def get_timestamp(name):
+    time_stamp = time.asctime().replace(" ","_").replace(":","_")
+    unique_name = f"{name}_at_{time_stamp}"
+    return unique_name
