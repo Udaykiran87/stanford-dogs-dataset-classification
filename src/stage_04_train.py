@@ -1,10 +1,9 @@
 import argparse
 import os
 import logging
-from src.utils import read_yaml, create_directories, load_full_model, get_callbacks, train_valid_generator
+from src.utils import read_yaml, create_directories, load_full_model, get_callbacks, train_valid_generator, \
+    get_unique_path_to_save_model
 from tensorflow.keras.utils import to_categorical
-
-
 
 STAGE = "train"
 
@@ -57,7 +56,15 @@ def train_model(config_path, params_path):
     verbose = 2,
     callbacks = callbacks,
     shuffle = True
-)
+    )
+
+    logging.info(f"training completed")
+
+    trained_model_dir = os.path.join(artifacts_dir, artifacts["TRAINED_MODEL_DIR"])
+    create_directories([trained_model_dir])
+    model_file_path = get_unique_path_to_save_model(trained_model_dir)
+    model.save(model_file_path)
+    logging.info(f"trained model is saved at: {model_file_path}")
 
 
 if __name__ == '__main__':

@@ -1,5 +1,7 @@
 import tensorflow as tf
 import logging
+from src.utils import get_timestamp
+import os
 
 def get_inceptionV3_model(input_shape, model_path):
     model = tf.keras.applications.InceptionV3(
@@ -44,7 +46,13 @@ def prepare_model(model, CLASSES, freeze_all, freeze_till, learning_rate):
     return full_model
 
 
-    def load_full_model(untrained_full_model_path):
-        model = tf.keras.models.load_model(untrained_full_model_path)
-        logging.info(f"untrained model is read from: {untrained_full_model_path}")
-        return model
+def load_full_model(untrained_full_model_path):
+    model = tf.keras.models.load_model(untrained_full_model_path)
+    logging.info(f"untrained model is read from: {untrained_full_model_path}")
+    return model
+
+def get_unique_path_to_save_model(trained_model_dir, model_name="model"):
+    timestamp = get_timestamp(model_name)
+    unique_model_name = f"{timestamp}_.h5"
+    unique_model_path = os.path.join(trained_model_dir, unique_model_name)
+    return unique_model_path
