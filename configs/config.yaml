@@ -16,10 +16,10 @@ artifacts:
   train_data_dirs:
     TRAIN_DATA_DIR:  \dataset\archive\images\Images
 
-source_download_dirs:
-  - ../outside_data/dog
-  - ../outside_data/cat
+# source_download_dirs:
+#   - ../outside_data/dog
+#   - ../outside_data/cat
 
-local_data_dirs:
-  - data/dog
-  - data/cat
+# local_data_dirs:
+#   - data/dog
+#   - data/cat
