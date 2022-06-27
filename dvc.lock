@@ -1,0 +1,17 @@
+schema: '2.0'
+stages:
+  load_data:
+    cmd: python src/stage_01_load_save.py
+    deps:
+    - path: src/stage_01_load_save.py
+      md5: 8545da8e03a3ed602abb5446afcb2f03
+      size: 5331
+    - path: src/utils/
+      md5: bdfe27f7363a139f86ab0ecfa7b687a7.dir
+      size: 17277
+      nfiles: 10
+    outs:
+    - path: data
+      md5: 47e48571835e2a431fc24024d1315a02.dir
+      size: 1603484720
+      nfiles: 41162
