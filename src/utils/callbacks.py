@@ -20,11 +20,54 @@ def create_and_save_checkpoint_callback(callbacks_dir, checkpoint_dir):
     checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
         filepath = checkpoint_file_path,
         save_best_only = True,
+        monitor='val_loss',
+        verbose=1,
+        mode='auto',
+        save_weights_only=False,
+        period=1
     )
 
     ckpt_callback_filepath = os.path.join(callbacks_dir, "checkpoint_cb.cb")
     joblib.dump(checkpoint_callback, ckpt_callback_filepath)
-    logging.info(f"tensorboard callback is being saved at {checkpoint_callback}")
+    logging.info(f"checkpoint callback is being saved at {checkpoint_callback}")
+
+def create_and_save_earlystop_callback(callbacks_dir):
+    earlystop_callback = tf.keras.callbacks.EarlyStopping(
+        monitor='val_loss',
+        min_delta=0.001,
+        patience=3,
+        verbose=1,
+        mode='auto'
+    )
+
+    earlystop_callback_filepath = os.path.join(callbacks_dir, "earlystop_cb.cb")
+    joblib.dump(earlystop_callback, earlystop_callback_filepath)
+    logging.info(f"earlystop callback is being saved at {earlystop_callback}")
+
+def create_and_save_csvlogger_callback(callbacks_dir, csvlogger_dir):
+    csvlogger_file_path = os.path.join(csvlogger_dir, "training_csv.log")
+    csvlogger_callback = tf.keras.callbacks.CSVLogger(
+        filename= csvlogger_file_path,
+        separator = ",",
+        append = False
+    )
+
+    csvlogger_callback_filepath = os.path.join(callbacks_dir, "csvlogger_cb.cb")
+    joblib.dump(csvlogger_callback, csvlogger_callback_filepath)
+    logging.info(f"csvlogger callback is being saved at {csvlogger_callback}")
+
+def create_and_save_reduceLR_callback(callbacks_dir):
+    reduceLR_callback = tf.keras.callbacks.ReduceLROnPlateau(
+        monitor='val_loss',
+        factor=0.1,
+        patience=3,
+        verbose=1,
+        mode='auto'
+    )
+
+    reduceLR_callback_filepath = os.path.join(callbacks_dir, "reduceLR_cb.cb")
+    joblib.dump(reduceLR_callback, reduceLR_callback_filepath)
+    logging.info(f"reduceLR callback is being saved at {reduceLR_callback}")
 
 def get_callbacks(callback_dir_path):
     callback_path = [
