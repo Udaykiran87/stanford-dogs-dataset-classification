@@ -2,6 +2,7 @@ import argparse
 import os
 import logging
 from src.utils import read_yaml, create_directories, load_full_model, get_callbacks, train_valid_generator
+from tensorflow.keras.utils import to_categorical
 
 
 
@@ -37,6 +38,26 @@ def train_model(config_path, params_path):
         config,
         params
     )
+
+    num_classes = len(train_generator.class_indices)
+    train_labels = train_generator.classes
+    train_labels = to_categorical(train_labels, num_classes=num_classes)
+    valid_labels = valid_generator.classes
+    valid_labels = to_categorical(valid_labels, num_classes=num_classes)
+
+    steps_per_epoch = train_generator.samples // train_generator.batch_size
+    validation_steps = valid_generator.samples // valid_generator.batch_size
+
+    history = model.fit(
+    train_generator,
+    epochs = params["EPOCHS"],
+    steps_per_epoch = steps_per_epoch,
+    validation_data = valid_generator,
+    validation_steps = validation_steps,
+    verbose = 2,
+    callbacks = callbacks,
+    shuffle = True
+)
 
 
 if __name__ == '__main__':

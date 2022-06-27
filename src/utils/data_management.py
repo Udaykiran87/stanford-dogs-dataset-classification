@@ -22,11 +22,13 @@ def train_valid_generator(config, params):
             height_shift_range= height_shift_range,
             validation_split=validation_split,
         )
+        logging.info("data augmentation is used for training")
     else:
         train_datagen = ImageDataGenerator(
             rescale= 1./255,
             validation_split=validation_split,
         )
+        logging.info("data augmentation is NOT used for training")
 
     validation_split = params["preprocess"]["validation_split"]
     valid_datagen = ImageDataGenerator(
