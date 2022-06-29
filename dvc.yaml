@@ -8,13 +8,12 @@ stages:
     outs:
     - data
 
-# stages:
-#   prepare_base_model:
-#     cmd: python src/stage_02_prepare_base_model.py
-#     deps:
-#       - src/stage_02_prepare_base_model.py
-#       - src/utils/
-#       - dataset
-#     outs:
-#       - artifacts/base_model/inceptionv3_base_model.h5
-#       - artifacts/base_model/updated_inceptionv3_base_model.h5
+  prepare_base_model:
+    cmd: python src/stage_02_prepare_base_model.py
+    deps:
+      - src/stage_02_prepare_base_model.py
+      - src/utils/
+      - data
+    outs:
+      - artifacts/base_model/inceptionv3_base_model.h5
+      - artifacts/base_model/updated_inceptionv3_base_model.h5

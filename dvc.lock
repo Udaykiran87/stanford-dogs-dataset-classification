@@ -4,8 +4,8 @@ stages:
     cmd: python src/stage_01_load_save.py
     deps:
     - path: src/stage_01_load_save.py
-      md5: 8545da8e03a3ed602abb5446afcb2f03
-      size: 5331
+      md5: 0d6b65cefaa9186701ab5449ee2456d6
+      size: 4863
     - path: src/utils/
       md5: bdfe27f7363a139f86ab0ecfa7b687a7.dir
       size: 17277
@@ -15,3 +15,24 @@ stages:
       md5: 47e48571835e2a431fc24024d1315a02.dir
       size: 1603484720
       nfiles: 41162
+  prepare_base_model:
+    cmd: python src/stage_02_prepare_base_model.py
+    deps:
+    - path: data
+      md5: 47e48571835e2a431fc24024d1315a02.dir
+      size: 1603484720
+      nfiles: 41162
+    - path: src/stage_02_prepare_base_model.py
+      md5: e1ed40be9aa5c7e3cc3511307cabc237
+      size: 2565
+    - path: src/utils/
+      md5: bdfe27f7363a139f86ab0ecfa7b687a7.dir
+      size: 17277
+      nfiles: 10
+    outs:
+    - path: artifacts/base_model/inceptionv3_base_model.h5
+      md5: 35f129715bcd67b83bde8eec9d2310e9
+      size: 88058832
+    - path: artifacts/base_model/updated_inceptionv3_base_model.h5
+      md5: 9ab3121708924e9aad4c4246709c3d6b
+      size: 89048656
