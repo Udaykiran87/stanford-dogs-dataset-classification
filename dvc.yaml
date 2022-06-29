@@ -4,7 +4,7 @@ stages:
     cmd: python src/stage_01_load_save.py
     deps:
     - src/stage_01_load_save.py
-    - src/utils/
+    - src/utils/common.py
     outs:
     - data
 
@@ -12,8 +12,21 @@ stages:
     cmd: python src/stage_02_prepare_base_model.py
     deps:
       - src/stage_02_prepare_base_model.py
-      - src/utils/
+      - src/utils/common.py
+      - src/utils/models.py
       - data
     outs:
       - artifacts/base_model/inceptionv3_base_model.h5
       - artifacts/base_model/updated_inceptionv3_base_model.h5
+
+  prepare_callbacks:
+    cmd: python src/stage_03_prepare_callbacks.py
+    deps:
+      - src/stage_03_prepare_callbacks.py
+      - src/utils/common.py
+      - src/utils/callbacks.py
+    outs:
+      - artifacts/callbacks/checkpoint_cb.cb
+      - artifacts/callbacks/tensorboard_cb.cb
+      - artifacts/callbacks/earlystop_cb.cb
+      - artifacts/callbacks/csvlogger_cb.cb

@@ -6,8 +6,7 @@ from src.utils import read_yaml, create_directories, create_and_save_tensorboard
     create_and_save_csvlogger_callback
 
 
-
-STAGE = "prepare_callback"
+STAGE = "prepare_callbacks"
 
 logging.basicConfig(
     filename=os.path.join("logs", 'running_logs.log'),
@@ -17,10 +16,9 @@ logging.basicConfig(
     )
 
 
-def prepare_callbacks(config_path, params_path):
+def prepare_callbacks(config_path):
     ## read config files
     config = read_yaml(config_path)
-    params = read_yaml(params_path)
 
     artifacts = config["artifacts"]
     artifacts_dir = artifacts["ARTIFACTS_DIR"]
@@ -41,19 +39,18 @@ def prepare_callbacks(config_path, params_path):
     create_and_save_checkpoint_callback(callbacks_dir, checkpoint_dir)
     create_and_save_earlystop_callback(callbacks_dir)
     create_and_save_csvlogger_callback(callbacks_dir, csvlogger_dir)
-    create_and_save_reduceLR_callback(callbacks_dir)
+    # create_and_save_reduceLR_callback(callbacks_dir)
 
 
 if __name__ == '__main__':
     args = argparse.ArgumentParser()
     args.add_argument("--config", "-c", default="configs/config.yaml")
-    args.add_argument("--params", "-p", default="params.yaml")
     parsed_args = args.parse_args()
 
     try:
         logging.info("\n********************")
         logging.info(f">>>>> stage {STAGE} started <<<<<")
-        prepare_callbacks(config_path=parsed_args.config, params_path=parsed_args.params)
+        prepare_callbacks(config_path=parsed_args.config)
         logging.info(f">>>>> stage {STAGE} completed!<<<<<\n")
     except Exception as e:
         logging.exception(e)

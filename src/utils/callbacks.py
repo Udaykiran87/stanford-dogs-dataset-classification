@@ -80,4 +80,14 @@ def get_callbacks(callback_dir_path):
 
     logging.info(f"saved callbacks are loaded from {callback_dir_path}")
 
+    reduceLR_callback = tf.keras.callbacks.ReduceLROnPlateau(
+        monitor='val_loss',
+        factor=0.1,
+        patience=3,
+        verbose=1,
+        mode='auto'
+    )
+    callbacks.append(reduceLR_callback)
+    logging.info(f"reduceLR_callback callback added to callback list")
+
     return callbacks

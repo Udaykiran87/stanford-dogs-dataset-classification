@@ -6,10 +6,9 @@ stages:
     - path: src/stage_01_load_save.py
       md5: 0d6b65cefaa9186701ab5449ee2456d6
       size: 4863
-    - path: src/utils/
-      md5: bdfe27f7363a139f86ab0ecfa7b687a7.dir
-      size: 17277
-      nfiles: 10
+    - path: src/utils/common.py
+      md5: fc24e1f61fca7a4f6668ad0a5887282b
+      size: 864
     outs:
     - path: data
       md5: 47e48571835e2a431fc24024d1315a02.dir
@@ -25,14 +24,41 @@ stages:
     - path: src/stage_02_prepare_base_model.py
       md5: e1ed40be9aa5c7e3cc3511307cabc237
       size: 2565
-    - path: src/utils/
-      md5: bdfe27f7363a139f86ab0ecfa7b687a7.dir
-      size: 17277
-      nfiles: 10
+    - path: src/utils/common.py
+      md5: fc24e1f61fca7a4f6668ad0a5887282b
+      size: 864
+    - path: src/utils/models.py
+      md5: ebb0fd6ef649e5c089fa1d3ff74792c7
+      size: 1899
     outs:
     - path: artifacts/base_model/inceptionv3_base_model.h5
-      md5: 35f129715bcd67b83bde8eec9d2310e9
+      md5: c44fd278a79d041e2d90d813e272c96d
       size: 88058832
     - path: artifacts/base_model/updated_inceptionv3_base_model.h5
-      md5: 9ab3121708924e9aad4c4246709c3d6b
+      md5: 3cfb239166b0a1108ddf8043ca8b4f17
       size: 89048656
+  prepare_callbacks:
+    cmd: python src/stage_03_prepare_callbacks.py
+    deps:
+    - path: src/stage_03_prepare_callbacks.py
+      md5: 770d01815e62d5bd52d1afa1a1ecf96d
+      size: 2011
+    - path: src/utils/callbacks.py
+      md5: bba87ca1916f4ee8081696b1238d0c4f
+      size: 3397
+    - path: src/utils/common.py
+      md5: fc24e1f61fca7a4f6668ad0a5887282b
+      size: 864
+    outs:
+    - path: artifacts/callbacks/checkpoint_cb.cb
+      md5: ff9be29bfacc40a5c0fcb7c697613a15
+      size: 838
+    - path: artifacts/callbacks/csvlogger_cb.cb
+      md5: 209e47e8367659f50ee3d97ef62991be
+      size: 270
+    - path: artifacts/callbacks/earlystop_cb.cb
+      md5: f68224cb733484e753e3020a7cf72a8b
+      size: 350
+    - path: artifacts/callbacks/tensorboard_cb.cb
+      md5: 624e92f2e9f6b31c0407f20d412302a3
+      size: 664
