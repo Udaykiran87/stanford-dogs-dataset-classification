@@ -36,11 +36,11 @@ def train_valid_generator(config, params):
         validation_split=0.2,
     )
 
-    train_data_dir = config["artifacts"]["TRAIN_DATA_DIR"]
+    train_data_dir = config["train_data_dirs"]["TRAIN_DATA_DIR"]
     img_width = params["preprocess"]["img_width"]
     img_height = params["preprocess"]["img_height"]
     color_mode = params["preprocess"]["color_mode"]
-    batch_size = params["preprocess"]["batch_size"]
+    batch_size = params["model"]["BATCH_SIZE"]
     class_mode = params["preprocess"]["class_mode"]
     shuffle = params["preprocess"]["shuffle"]
     seed = params["preprocess"]["seed"]

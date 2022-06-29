@@ -13,8 +13,8 @@ artifacts:
   CSVLOGGER_DIR: csvlogger_dir
   DATA_DIR: dataset
 
-  train_data_dirs:
-    TRAIN_DATA_DIR:  /dataset/archive/images/Images
+train_data_dirs:
+  TRAIN_DATA_DIR:  data/Images
 
 source_download_url:
   image_download_url: "http://vision.stanford.edu/aditya86/ImageNetDogs/images.tar"

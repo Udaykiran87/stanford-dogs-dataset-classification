@@ -5,14 +5,14 @@ preprocess:
   horizontal_flip: True
   rotation_range: 20
   width_shift_range: 0.2
-  height_shift_range: 0.2   
-  validation_split: 0.2 
+  height_shift_range: 0.2
+  validation_split: 0.2
   img_width: 224
   img_height: 224
   channels: 3
   color_mode: 'rgb'
-  class_mode: 'categorical' 
-  shuffle: True 
+  class_mode: 'categorical'
+  shuffle: True
   seed: 1337
   do_data_augmentation: True
 
@@ -21,4 +21,4 @@ model:
   EPOCHS: 30
   CLASSES: 120
   LEARNING_RATE: 0.001
-  BATCH_SIZE: 64
+  BATCH_SIZE: 32

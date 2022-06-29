@@ -49,7 +49,7 @@ def train_model(config_path, params_path):
 
     history = model.fit(
     train_generator,
-    epochs = params["EPOCHS"],
+    epochs = params["model"]["EPOCHS"],
     steps_per_epoch = steps_per_epoch,
     validation_data = valid_generator,
     validation_steps = validation_steps,
