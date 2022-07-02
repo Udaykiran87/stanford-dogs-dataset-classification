@@ -53,3 +53,17 @@ stages:
       - params.yaml
     outs:
       - artifacts/model
+      - artifacts/model_train_metrics_dir
+
+  evaluate:
+    cmd: python src/stage_05_evaluate.py
+    deps:
+      - src/stage_05_evaluate.py
+      - src/utils/common.py
+      - src/utils/models.py
+      - artifacts/model
+      - artifacts/model_train_metrics_dir
+      - configs/config.yaml
+      - params.yaml
+    outs:
+      - artifacts/model_eval_metrics_dir

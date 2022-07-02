@@ -12,6 +12,8 @@ artifacts:
   CALLBACKS_DIR: callbacks
   CSVLOGGER_DIR: csvlogger_dir
   DATA_DIR: dataset
+  MODEL_TRAIN_METRICS_DIR: model_train_metrics_dir
+  MODEL_EVAL_METRICS_DIR: model_eval_metrics_dir
 
 train_data_dirs:
   TRAIN_DATA_DIR:  data/Images
