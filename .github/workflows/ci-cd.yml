@@ -1,4 +1,3 @@
-# # uncomment below lines to use CML
 name: stanford-dogs-dataset-classification
 
 on: [push]
@@ -15,7 +14,7 @@ jobs:
 
       - name: cml-run
         env:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ secrets._GITHUB_TOKEN }}
         run: |
           # Your ML wokflow commands
           pip install --upgrade pip
