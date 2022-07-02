@@ -1,6 +1,7 @@
 import argparse
 import os
 import logging
+import pickle
 from src.utils import read_yaml, create_directories, load_full_model, get_callbacks, train_valid_generator, \
     get_unique_path_to_save_model
 from tensorflow.keras.utils import to_categorical
@@ -24,7 +25,8 @@ def train_model(config_path, params_path):
     artifacts_dir = artifacts["ARTIFACTS_DIR"]
 
     train_model_dir_path = os.path.join(artifacts_dir, artifacts["TRAINED_MODEL_DIR"])
-    create_directories([train_model_dir_path])
+    model_train_metrics_dir_path = os.path.join(artifacts_dir, artifacts["MODEL_TRAIN_METRICS_DIR"])
+    create_directories([train_model_dir_path, model_train_metrics_dir_path])
 
     untrained_full_model_path = os.path.join(artifacts_dir, artifacts["BASE_MODEL_DIR"], artifacts["UPDATED_BASE_MODEL_NAME"])
 
@@ -57,6 +59,11 @@ def train_model(config_path, params_path):
     callbacks = callbacks,
     shuffle = True
     )
+
+    model_history_file = os.path.join(model_train_metrics_dir_path, "trainHistoryDict")
+    with open(model_history_file, 'wb') as file_pi:
+        pickle.dump(history.history, file_pi)
+    logging.info(f"model history is saved at: {model_history_file}")
 
     logging.info(f"training completed")
 
