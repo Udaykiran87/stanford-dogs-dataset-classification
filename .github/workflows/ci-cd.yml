@@ -22,5 +22,8 @@ jobs:
           dvc repro -v
           echo "# REPORTS" >> report.md
           echo "## metrics" >> report.md
-          cat scores.json >> report.md
+          echo "### Validation Accuracy" >> report.md
+          cml artifacts\model_eval_metrics_dir\baseline_acc_epoch.png --md >> report.md
+          echo "### Validation Loss" >> report.md
+          cml artifacts\model_eval_metrics_dir\baseline_loss_epoch.png --md >> report.md
           cml-send-comment report.md
