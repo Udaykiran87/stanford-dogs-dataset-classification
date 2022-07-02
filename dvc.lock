@@ -34,14 +34,14 @@ stages:
       md5: fc24e1f61fca7a4f6668ad0a5887282b
       size: 864
     - path: src/utils/models.py
-      md5: ada35ed890da2c0b6057af87bde8f840
-      size: 2082
+      md5: 372946deef6c65d303dcdfb9b58d3a3a
+      size: 2189
     outs:
     - path: artifacts/base_model/inceptionv3_base_model.h5
-      md5: 06370dc20fd4b55f0631f5a5f9ed2010
+      md5: 745764cb88aeb194652a35725ff7bbe1
       size: 88058832
     - path: artifacts/base_model/updated_inceptionv3_base_model.h5
-      md5: 057d45d1184e4284aedcd889f6de6764
+      md5: 382f20e3ea301ec0cc9f6ea2d750175f
       size: 89048656
   prepare_callbacks:
     cmd: python src/stage_03_prepare_callbacks.py
@@ -78,7 +78,7 @@ stages:
     cmd: python src/stage_04_train.py
     deps:
     - path: artifacts/base_model/updated_inceptionv3_base_model.h5
-      md5: 057d45d1184e4284aedcd889f6de6764
+      md5: 382f20e3ea301ec0cc9f6ea2d750175f
       size: 89048656
     - path: artifacts/callbacks/checkpoint_cb.cb
       md5: ff9be29bfacc40a5c0fcb7c697613a15
@@ -115,14 +115,45 @@ stages:
       md5: 68ad163ffb870c0edf1f97491b672d0e
       size: 2676
     - path: src/utils/models.py
-      md5: ada35ed890da2c0b6057af87bde8f840
-      size: 2082
+      md5: 372946deef6c65d303dcdfb9b58d3a3a
+      size: 2189
     outs:
     - path: artifacts/model
-      md5: b48915fa206af91a1ccbfffc227dc78d.dir
+      md5: ee79fccccac2a9eadcfd25ceaba1cedf.dir
       size: 91021680
       nfiles: 1
     - path: artifacts/model_train_metrics_dir
-      md5: f1f9fd077bfb41c46673914fa4e802b5.dir
-      size: 1434
+      md5: eea5113d4ecb7bbb3f40e4241e8104ac.dir
+      size: 1596
       nfiles: 1
+  evaluate:
+    cmd: python src/stage_05_evaluate.py
+    deps:
+    - path: artifacts/model
+      md5: ee79fccccac2a9eadcfd25ceaba1cedf.dir
+      size: 91021680
+      nfiles: 1
+    - path: artifacts/model_train_metrics_dir
+      md5: eea5113d4ecb7bbb3f40e4241e8104ac.dir
+      size: 1596
+      nfiles: 1
+    - path: configs/config.yaml
+      md5: 9b1e4e996d7c80eeb5ba62d31a164945
+      size: 843
+    - path: params.yaml
+      md5: 0d9fc05dc792dc894d65bd84dbc44b97
+      size: 521
+    - path: src/stage_05_evaluate.py
+      md5: 7d57294430f9b9a60a9be5eae85503e2
+      size: 3066
+    - path: src/utils/common.py
+      md5: fc24e1f61fca7a4f6668ad0a5887282b
+      size: 864
+    - path: src/utils/models.py
+      md5: 372946deef6c65d303dcdfb9b58d3a3a
+      size: 2189
+    outs:
+    - path: artifacts/model_eval_metrics_dir
+      md5: f07620d805c99d9580da289787d2cadd.dir
+      size: 684990
+      nfiles: 2

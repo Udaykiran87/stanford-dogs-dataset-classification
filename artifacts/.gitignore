@@ -1,1 +1,3 @@
 /model
+/model_train_metrics_dir
+/model_eval_metrics_dir
