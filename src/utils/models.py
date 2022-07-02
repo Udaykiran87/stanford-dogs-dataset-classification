@@ -56,3 +56,9 @@ def get_unique_path_to_save_model(trained_model_dir, model_name="model"):
     unique_model_name = f"{timestamp}_.h5"
     unique_model_path = os.path.join(trained_model_dir, unique_model_name)
     return unique_model_path
+
+def get_latest_pretrained_model(model_dir):
+    list_of_models = os.listdir(model_dir)
+    list_of_models_full_path = [os.path.join(model_dir, file) for file in list_of_models]
+    latest_model = max(list_of_models_full_path, key=os.path.getctime)
+    return latest_model
